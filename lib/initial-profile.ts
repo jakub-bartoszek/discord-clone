@@ -1,11 +1,11 @@
 import { db } from "./db";
-import { currentUser, redirectToSignIn } from "@clerk/nextjs/server";
+import { auth, currentUser, redirectToSignIn } from "@clerk/nextjs/server";
 
 export const initialProfile = async () => {
  const user = await currentUser();
 
  if (!user) {
-  return redirectToSignIn();
+  return auth().redirectToSignIn();
  }
 
  const profile = await db.profile.findUnique({
