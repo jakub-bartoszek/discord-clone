@@ -1,13 +1,27 @@
-import { ChannelType } from "@prisma/client";
+import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { Hash, Mic, ShieldAlert, ShieldCheck } from "lucide-react";
 import { ServerHeader } from "./server-header";
+import { ServerSearch } from "./server-search";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ServerSidebarProps {
  serverId: string;
 }
+
+const iconMap = {
+ [ChannelType.TEXT]: <Hash className="mr-2 h-4 w-4" />,
+ [ChannelType.AUDIO]: <Mic className="mr-2 h-4 w-4" />
+};
+
+const roleIconMap = {
+ [MemberRole.GUEST]: null,
+ [MemberRole.MODERATOR]: <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />,
+ [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-indigo-500" />
+};
 
 export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
  const profile = await currentProfile();
@@ -53,6 +67,41 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
     server={server}
     role={role}
    />
+   <ScrollArea className="flex-1 px-3">
+    <div className="mt-2">
+     <ServerSearch
+      data={[
+       {
+        label: "Text channels",
+        type: "channel",
+        data: textChannels?.map((channel) => ({
+         id: channel.id,
+         name: channel.name,
+         icon: iconMap[channel.type]
+        }))
+       },
+       {
+        label: "Voice channels",
+        type: "channel",
+        data: audioChannels?.map((channel) => ({
+         id: channel.id,
+         name: channel.name,
+         icon: iconMap[channel.type]
+        }))
+       },
+       {
+        label: "Members",
+        type: "member",
+        data: members?.map((member) => ({
+         id: member.id,
+         name: member.profile.name,
+         icon: roleIconMap[member.role]
+        }))
+       }
+      ]}
+     />
+    </div>
+   </ScrollArea>
   </div>
  );
 };
