@@ -150,7 +150,7 @@ export const CreateChannelModal = () => {
         disabled={isLoading}
         variant={"primary"}
        >
-        Create server
+        Create channel
        </Button>
       </DialogFooter>
      </form>
