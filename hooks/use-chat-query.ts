@@ -10,7 +10,12 @@ interface ChatQueryProps {
  paramValue: string;
 }
 
-export const useChatQuery = ({ queryKey, apiUrl, paramKey, paramValue }: ChatQueryProps) => {
+export const useChatQuery = ({
+ queryKey,
+ apiUrl,
+ paramKey,
+ paramValue
+}: ChatQueryProps) => {
  const { isConnected } = useSocket();
 
  const fetchMessages = async ({ pageParam = undefined }) => {
@@ -29,15 +34,16 @@ export const useChatQuery = ({ queryKey, apiUrl, paramKey, paramValue }: ChatQue
   return res.json();
  };
 
- const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } = useInfiniteQuery(
-  //@ts-ignore
-  {
-   queryKey: [queryKey],
-   queryFn: fetchMessages,
-   getNextPageParam: (lastPage) => lastPage?.nextCursor,
-   refetchInterval: isConnected ? false : 1000
-  }
- );
+ const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
+  useInfiniteQuery(
+   //@ts-ignore
+   {
+    queryKey: [queryKey],
+    queryFn: fetchMessages,
+    getNextPageParam: (lastPage) => lastPage?.nextCursor,
+    refetchInterval: 500
+   }
+  );
 
  return { data, fetchNextPage, hasNextPage, isFetchingNextPage, status };
 };
