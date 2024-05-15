@@ -33,30 +33,28 @@ const MemberIdPage = async ({ params }: MemberIdPageProps) => {
   return redirect("/");
  }
 
- try {
-  const conversation = await getOrCreateConversation(currentMember.id, params.memberId);
+ const conversation = await getOrCreateConversation(
+  currentMember.id,
+  params.memberId
+ );
 
-  if (!conversation) {
-   return redirect(`/servers/${params.serverId}`);
-  }
-
-  const { memberOne, memberTwo } = conversation;
-  const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
-
-  return (
-   <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
-    <ChatHeader
-     imageUrl={otherMember.profile.imageUrl}
-     name={otherMember.profile.name}
-     serverId={params.serverId}
-     type="conversation"
-    />
-   </div>
-  );
- } catch (error) {
-  console.error("Error in MemberIdPage:", error);
+ if (!conversation) {
   return redirect(`/servers/${params.serverId}`);
  }
+
+ const { memberOne, memberTwo } = conversation;
+ const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
+
+ return (
+  <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
+   <ChatHeader
+    imageUrl={otherMember.profile.imageUrl}
+    name={otherMember.profile.name}
+    serverId={params.serverId}
+    type="conversation"
+   />
+  </div>
+ );
 };
 
 export default MemberIdPage;
