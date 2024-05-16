@@ -19,36 +19,24 @@ export default async function handler(
   if (!profile) return res.status(401).json({ error: "Unauthorized" });
 
   if (!conversationId)
-   return res.status(400).json({ error: "Conversation ID Missing" });
+   return res.status(400).json({ error: "Conversation ID missing" });
 
-  if (!content) return res.status(400).json({ error: "Content Missing" });
+  if (!content) return res.status(400).json({ error: "Content missing" });
 
   const conversation = await db.conversation.findFirst({
    where: {
     id: conversationId as string,
     OR: [
-     {
-      memberOne: {
-       profileId: profile.id
-      }
-     },
-     {
-      memberTwo: {
-       profileId: profile.id
-      }
-     }
+     { memberOne: { profileId: profile.id } },
+     { memberTwo: { profileId: profile.id } }
     ]
    },
    include: {
     memberOne: {
-     include: {
-      profile: true
-     }
+     include: { profile: true }
     },
     memberTwo: {
-     include: {
-      profile: true
-     }
+     include: { profile: true }
     }
    }
   });

@@ -1,25 +1,23 @@
+import { NextApiRequest } from "next";
+import { MemberRole } from "@prisma/client";
+
+import { NextApiResponseServerIo } from "@/types";
 import { currentProfilePages } from "@/lib/current-profile-pages";
 import { db } from "@/lib/db";
-import { NextApiResponseServerIo } from "@/types";
-import { MemberRole } from "@prisma/client";
-import { NextApiRequest } from "next";
 
 export default async function handler(
  req: NextApiRequest,
  res: NextApiResponseServerIo
 ) {
- if (req.method !== "DELETE" && req.method !== "PATCH") {
+ if (req.method !== "DELETE" && req.method !== "PATCH")
   return res.status(405).json({ error: "Method not allowed" });
- }
 
  try {
   const profile = await currentProfilePages(req);
-  const { directMessageId, conversationId } = req.query;
   const { content } = req.body;
+  const { directMessageId, conversationId } = req.query;
 
-  if (!profile) {
-   return res.status(401).json({ error: "Unauthorized" });
-  }
+  if (!profile) return res.status(401).json({ error: "Unauthorized" });
 
   if (!conversationId) {
    return res.status(401).json({ error: "Conversation ID missing" });
@@ -29,29 +27,13 @@ export default async function handler(
    where: {
     id: conversationId as string,
     OR: [
-     {
-      memberOne: {
-       profileId: profile.id
-      }
-     },
-     {
-      memberTwo: {
-       profileId: profile.id
-      }
-     }
+     { memberOne: { profileId: profile.id } },
+     { memberTwo: { profileId: profile.id } }
     ]
    },
    include: {
-    memberOne: {
-     include: {
-      profile: true
-     }
-    },
-    memberTwo: {
-     include: {
-      profile: true
-     }
-    }
+    memberOne: { include: { profile: true } },
+    memberTwo: { include: { profile: true } }
    }
   });
 
@@ -79,18 +61,15 @@ export default async function handler(
    }
   });
 
-  if (!directMessage || directMessage.deleted) {
+  if (!directMessage || directMessage.deleted)
    return res.status(404).json({ error: "Message not found" });
-  }
 
   const isMessageOwner = directMessage.memberId === member.id;
   const isAdmin = member.role === MemberRole.ADMIN;
   const isModerator = member.role === MemberRole.MODERATOR;
   const canModify = isMessageOwner || isAdmin || isModerator;
 
-  if (!canModify) {
-   return res.status(401).json({ error: "Member not found" });
-  }
+  if (!canModify) return res.status(401).json({ error: "Unauthorized" });
 
   if (req.method === "DELETE") {
    directMessage = await db.directMessage.update({
@@ -99,7 +78,7 @@ export default async function handler(
     },
     data: {
      fileUrl: null,
-     content: "This message has ben deleted.",
+     content: "This message has been deleted.",
      deleted: true
     },
     include: {
@@ -113,9 +92,7 @@ export default async function handler(
   }
 
   if (req.method === "PATCH") {
-   if (!isMessageOwner) {
-    return res.status(401).json({ error: "Unauthorized" });
-   }
+   if (!isMessageOwner) return res.status(401).json({ error: "Unauthorized" });
 
    directMessage = await db.directMessage.update({
     where: {
@@ -134,7 +111,7 @@ export default async function handler(
    });
   }
 
-  const updateKey = `chat:${conversationId}:messages:update`;
+  const updateKey = `chat:${conversation.id}:messages:update`;
 
   res?.socket?.server?.io?.emit(updateKey, directMessage);
 

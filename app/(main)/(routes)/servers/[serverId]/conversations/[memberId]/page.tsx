@@ -1,13 +1,13 @@
-import { db } from "@/lib/db";
-
-import { getOrCreateConversation } from "@/lib/conversation";
-import { currentProfile } from "@/lib/current-profile";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
+import { currentProfile } from "@/lib/current-profile";
+import { db } from "@/lib/db";
+import { getOrCreateConversation } from "@/lib/conversation";
 import { ChatHeader } from "@/components/chat/chat-header";
-import { ChatInput } from "@/components/chat/chat-input";
 import { ChatMessages } from "@/components/chat/chat-messages";
+import { ChatInput } from "@/components/chat/chat-input";
 import { MediaRoom } from "@/components/media-room";
+import { auth } from "@clerk/nextjs/server";
 
 interface MemberIdPageProps {
  params: {
@@ -19,7 +19,10 @@ interface MemberIdPageProps {
  };
 }
 
-const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
+const MemberIdPage = async ({
+ params: { memberId, serverId },
+ searchParams: { video }
+}: MemberIdPageProps) => {
  const profile = await currentProfile();
 
  if (!profile) {
@@ -28,7 +31,7 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
 
  const currentMember = await db.member.findFirst({
   where: {
-   serverId: params.serverId,
+   serverId,
    profileId: profile.id
   },
   include: {
@@ -40,16 +43,12 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
   return redirect("/");
  }
 
- const conversation = await getOrCreateConversation(
-  currentMember.id,
-  params.memberId
- );
+ const conversation = await getOrCreateConversation(currentMember.id, memberId);
 
- if (!conversation) {
-  return redirect(`/servers/${params.serverId}`);
- }
+ if (!conversation) return redirect(`/servers/${serverId}`);
 
  const { memberOne, memberTwo } = conversation;
+
  const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
 
  return (
@@ -57,17 +56,17 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
    <ChatHeader
     imageUrl={otherMember.profile.imageUrl}
     name={otherMember.profile.name}
-    serverId={params.serverId}
+    serverId={serverId}
     type="conversation"
    />
-   {searchParams.video && (
+   {video && (
     <MediaRoom
      chatId={conversation.id}
-     video={true}
-     audio={true}
+     video
+     audio
     />
    )}
-   {!searchParams.video && (
+   {!video && (
     <>
      <ChatMessages
       member={currentMember}
