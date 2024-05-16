@@ -18,9 +18,9 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
  const [token, setToken] = useState("");
 
  useEffect(() => {
-  if (!user?.firstName || !user?.lastName) return;
+  if (!user?.username || (!user.firstName && !user.lastName)) return;
 
-  const name = `${user.firstName} ${user.lastName}`;
+  const name = user?.username || `${user.firstName} ${user.lastName}`;
 
   (async () => {
    try {
@@ -32,7 +32,7 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
     console.log(error);
    }
   })();
- }, [user?.firstName, user?.lastName, chatId]);
+ }, [user?.username, user?.firstName, user?.lastName, chatId]);
 
  if (token === "") {
   return (
