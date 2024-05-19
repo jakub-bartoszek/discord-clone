@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -53,24 +47,26 @@ enum MemberRole {
 }
 
 model Member {
-  id                     String          @id @default(uuid())
-  role                   MemberRole      @default(GUEST)
-  profileId              String
-  profile                Profile         @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  serverId               String
-  server                 Server          @relation(fields: [serverId], references: [id], onDelete: Cascade)
-  currentChannelId       String?
-  currentChannel         Channel?        @relation("ChannelMembers", fields: [currentChannelId], references: [id])
-  messages               Message[]
-  directMessages         DirectMessage[]
-  conversationsInitiated Conversation[]  @relation("MemberOne")
-  conversationsReceived  Conversation[]  @relation("MemberTwo")
-  createdAt              DateTime        @default(now())
-  updatedAt              DateTime        @updatedAt
+  id   String     @id @default(uuid())
+  role MemberRole @default(GUEST)
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+
+  messages       Message[]
+  directMessages DirectMessage[]
+
+  conversationsInitiated Conversation[] @relation("MemberOne")
+  conversationsReceived  Conversation[] @relation("MemberTwo")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([profileId])
   @@index([serverId])
-  @@index([currentChannelId])
 }
 
 enum ChannelType {
@@ -79,15 +75,17 @@ enum ChannelType {
 }
 
 model Channel {
-  id           String      @id @default(uuid())
-  name         String
-  type         ChannelType @default(TEXT)
-  profileId    String
-  profile      Profile     @relation(fields: [profileId], references: [id], onDelete: Cascade)
-  serverId     String
-  server       Server      @relation(fields: [serverId], references: [id], onDelete: Cascade)
-  messages     Message[]
-  participants Member[]    @relation("ChannelMembers")
+  id   String      @id @default(uuid())
+  name String
+  type ChannelType @default(TEXT)
+
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  serverId String
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+
+  messages Message[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
