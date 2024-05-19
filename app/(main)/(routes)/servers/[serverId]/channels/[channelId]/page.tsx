@@ -73,6 +73,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
    )}
    {channel.type === ChannelType.AUDIO && (
     <MediaRoom
+     profile={profile}
      chatId={channel.id}
      video={true}
      audio={true}
