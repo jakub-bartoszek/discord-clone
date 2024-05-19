@@ -47,13 +47,6 @@ export const ServerChannel = ({
  const params = useParams();
  const router = useRouter();
 
- const channelId = channel.id;
-
- const queryKey = `channel:${channelId}:participants`;
- const apiUrl = "/api/participants";
-
- const { data } = useParticipantsQuery({ queryKey, apiUrl, channelId });
-
  const { onOpen } = useModal();
  const [participants, setParticipants] = useState<Participant[]>([]);
 
@@ -88,32 +81,11 @@ export const ServerChannel = ({
   fetchParticipants();
  }, [channel, members]);
 
- console.log(participants)
+ console.log(participants);
 
  const Icon = iconMap[channel.type];
 
- const onClick = async () => {
-  if (channel.type === ChannelType.AUDIO) {
-   try {
-    const response = await fetch(`/api/socket/participants`, {
-     method: "POST",
-     headers: {
-      "Content-Type": "application/json"
-     },
-     body: JSON.stringify({
-      serverId: server.id,
-      channelId: channel.id
-     })
-    });
-
-    if (!response.ok) {
-     throw new Error("Failed to join voice channel");
-    }
-   } catch (error) {
-    console.error(error);
-   }
-  }
-
+ const onClick = () => {
   router.push(`/servers/${params?.serverId}/channels/${channel.id}`);
  };
 
@@ -171,6 +143,5 @@ export const ServerChannel = ({
      />
     ))}
   </div>
-
  );
 };
