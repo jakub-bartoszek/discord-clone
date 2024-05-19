@@ -3,28 +3,30 @@
 import { useState, useEffect } from "react";
 import { LiveKitRoom, VideoConference } from "@livekit/components-react";
 import "@livekit/components-styles";
-import { Channel } from "@prisma/client";
-import { useUser } from "@clerk/nextjs";
-import { Loader2, Video } from "lucide-react";
+import { Loader2 } from "lucide-react";
+import { Profile } from "@prisma/client";
 
 interface MediaRoomProps {
  chatId: string;
  video: boolean;
  audio: boolean;
+ profile: Profile;
 }
 
-export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
- const { user } = useUser();
+export const MediaRoom = ({
+ chatId,
+ video,
+ audio,
+ profile
+}: MediaRoomProps) => {
  const [token, setToken] = useState("");
 
  useEffect(() => {
-  if (!user?.username || (!user.firstName && !user.lastName)) return;
-
-  const name = user?.username || `${user.firstName} ${user.lastName}`;
-
   (async () => {
    try {
-    const res = await fetch(`/api/livekit?room=${chatId}&username=${name}`);
+    const res = await fetch(
+     `/api/livekit?room=${chatId}&username=${profile.name}&userId=${profile.id}`
+    );
     const data = await res.json();
 
     setToken(data.token);
@@ -32,7 +34,7 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
     console.log(error);
    }
   })();
- }, [user?.username, user?.firstName, user?.lastName, chatId]);
+ }, [profile.name, profile.id, chatId]);
 
  if (token === "") {
   return (
