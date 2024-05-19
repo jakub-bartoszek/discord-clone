@@ -1,19 +1,36 @@
 "use client";
 
-import { Channel, ChannelType, MemberRole, Server } from "@prisma/client";
+import {
+ Channel,
+ ChannelType,
+ Member,
+ MemberRole,
+ Profile,
+ Server
+} from "@prisma/client";
 import { useParams, useRouter } from "next/navigation";
 import { Edit, Hash, Lock, Mic, Trash } from "lucide-react";
 
+import qs from "query-string";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { ModalType, useModal } from "@/hooks/use-modal-store";
-import { useParticipantsQuery } from "@/hooks/use-participants-query";
-import { ChannelParticipant } from "@/components/channel/channel-participant";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { ServerMember } from "./server-member";
 
 interface ServerChannelProps {
  channel: Channel;
  server: Server;
  role?: MemberRole;
+ members?: Member[];
+}
+
+interface Participant {
+ id: string;
+ identity: string;
+ member: Member & { profile: Profile };
+ metadata: string;
 }
 
 const iconMap = {
@@ -24,7 +41,8 @@ const iconMap = {
 export const ServerChannel = ({
  server,
  channel,
- role
+ role,
+ members
 }: ServerChannelProps) => {
  const params = useParams();
  const router = useRouter();
@@ -37,6 +55,40 @@ export const ServerChannel = ({
  const { data } = useParticipantsQuery({ queryKey, apiUrl, channelId });
 
  const { onOpen } = useModal();
+ const [participants, setParticipants] = useState<Participant[]>([]);
+
+ useEffect(() => {
+  const fetchParticipants = async () => {
+   if (channel.type === ChannelType.AUDIO && members) {
+    try {
+     const url = qs.stringifyUrl({
+      url: `/api/channels/${channel.id}/participants`,
+      query: {
+       channelId: channel.id
+      }
+     });
+
+     const response = await axios.get(url);
+
+     const participants = response.data.map((participant: any) => {
+      const profileId = participant.metadata;
+
+      return {
+       member: members.find((member) => member.profileId === profileId)
+      };
+     });
+
+     setParticipants(participants);
+    } catch (error) {
+     console.error("Failed to fetch participants:", error);
+    }
+   }
+  };
+
+  fetchParticipants();
+ }, [channel, members]);
+
+ console.log(participants)
 
  const Icon = iconMap[channel.type];
 
@@ -71,7 +123,7 @@ export const ServerChannel = ({
  };
 
  return (
-  <>
+  <div>
    <button
     onClick={onClick}
     className={cn(
@@ -90,7 +142,7 @@ export const ServerChannel = ({
      {channel.name}
     </p>
     {channel.name !== "general" && role !== MemberRole.GUEST && (
-     <div className="ml-auto flex items-center- gap-x-2">
+     <div className="ml-auto flex items-center gap-x-2">
       <ActionTooltip label="Edit">
        <Edit
         onClick={(e) => onAction(e, "editChannel")}
@@ -109,17 +161,16 @@ export const ServerChannel = ({
      <Lock className="ml-auto w-4 h-4 text-zinc-500 dark:text-zinc-400" />
     )}
    </button>
-   {channel.type === "AUDIO" && data && data?.items?.length !== 0 && (
-    <>
-     {data.items.map((member: any) => (
-      <ChannelParticipant
-       key={member.id}
-       member={member}
-       server={server}
-      />
-     ))}
-    </>
-   )}
-  </>
+   {channel.type === ChannelType.AUDIO &&
+    participants.length > 0 &&
+    participants.map((participant) => (
+     <ServerMember
+      key={participant.member.id}
+      server={server}
+      member={participant.member}
+     />
+    ))}
+  </div>
+
  );
 };

@@ -24,7 +24,9 @@ const iconMap = {
 
 const roleIconMap = {
  [MemberRole.GUEST]: null,
- [MemberRole.MODERATOR]: <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />,
+ [MemberRole.MODERATOR]: (
+  <ShieldCheck className="mr-2 h-4 w-4 text-indigo-500" />
+ ),
  [MemberRole.ADMIN]: <ShieldAlert className="mr-2 h-4 w-4 text-rose-500" />
 };
 
@@ -65,6 +67,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
  }
 
  const role = server.members.find((member) => member.profileId === profile.id)?.role;
+ const allMembers = server?.members;
 
  return (
   <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-zinc-100">
@@ -139,6 +142,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
         channel={channel}
         role={role}
         server={server}
+        members={allMembers}
        />
       ))}
      </div>
