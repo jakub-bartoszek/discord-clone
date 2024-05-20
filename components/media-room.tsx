@@ -10,7 +10,7 @@ interface MediaRoomProps {
  chatId: string;
  video: boolean;
  audio: boolean;
- profile: Profile;
+ profile?: Profile;
 }
 
 export const MediaRoom = ({
@@ -23,18 +23,20 @@ export const MediaRoom = ({
 
  useEffect(() => {
   (async () => {
-   try {
-    const res = await fetch(
-     `/api/livekit?room=${chatId}&username=${profile.name}&userId=${profile.id}`
-    );
-    const data = await res.json();
+   if (profile) {
+    try {
+     const res = await fetch(
+      `/api/livekit?room=${chatId}&username=${profile.name}&userId=${profile.id}`
+     );
+     const data = await res.json();
 
-    setToken(data.token);
-   } catch (error) {
-    console.log(error);
+     setToken(data.token);
+    } catch (error) {
+     console.log(error);
+    }
    }
   })();
- }, [profile.name, profile.id, chatId]);
+ }, [profile, profile?.name, profile?.id, chatId]);
 
  if (token === "") {
   return (
