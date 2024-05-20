@@ -81,8 +81,6 @@ export const ServerChannel = ({
   fetchParticipants();
  }, [channel, members]);
 
- console.log(participants);
-
  const Icon = iconMap[channel.type];
 
  const onClick = () => {
