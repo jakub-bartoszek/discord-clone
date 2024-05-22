@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { DirectMessage } from "@prisma/client";
-
-import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
+import { DirectMessage } from "@prisma/client";
 
 const MESSAGES_BATCH = 10;
 
@@ -64,6 +63,6 @@ export async function GET(req: Request) {
   return NextResponse.json({ items: messages, nextCursor });
  } catch (error) {
   console.error("[DIRECT_MESSAGES_GET]", error);
-  return new NextResponse("Internal error", { status: 500 });
+  return new NextResponse("Internal Error", { status: 500 });
  }
 }

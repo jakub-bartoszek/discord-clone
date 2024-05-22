@@ -1,23 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useRouter, useParams } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
 import qs from "query-string";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { Member, MemberRole, Profile } from "@prisma/client";
-import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { useModal } from "@/hooks/use-modal-store";
+import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { Member, MemberRole, Profile } from "@prisma/client";
 
+import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 import { UserAvatar } from "@/components/user-avatar";
 import { ActionTooltip } from "@/components/action-tooltip";
-import { cn } from "@/lib/utils";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useModal } from "@/hooks/use-modal-store";
 
 interface ChatItemProps {
  id: string;
@@ -109,7 +109,7 @@ export const ChatItem = ({
   form.reset({
    content: content
   });
- }, [content]);
+ }, [content, form]);
 
  const fileType = fileUrl?.split(".").pop();
 

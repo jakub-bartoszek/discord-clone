@@ -1,12 +1,11 @@
-import { ChannelType, MemberRole } from "@prisma/client";
 import { redirect } from "next/navigation";
-import { Hash, Mic, ShieldAlert, ShieldCheck } from "lucide-react";
-
-import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
+import { ChannelType, MemberRole } from "@prisma/client";
+
+import { Hash, Mic, ShieldAlert, ShieldCheck } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-
 import { ServerHeader } from "./server-header";
 import { ServerSearch } from "./server-search";
 import { ServerSection } from "./server-section";
@@ -58,15 +57,23 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
   }
  });
 
- const textChannels = server?.channels.filter((channel) => channel.type === ChannelType.TEXT);
- const audioChannels = server?.channels.filter((channel) => channel.type === ChannelType.AUDIO);
- const members = server?.members.filter((member) => member.profileId !== profile.id);
+ const textChannels = server?.channels.filter(
+  (channel) => channel.type === ChannelType.TEXT
+ );
+ const audioChannels = server?.channels.filter(
+  (channel) => channel.type === ChannelType.AUDIO
+ );
+ const members = server?.members.filter(
+  (member) => member.profileId !== profile.id
+ );
 
  if (!server) {
   redirect("/");
  }
 
- const role = server.members.find((member) => member.profileId === profile.id)?.role;
+ const role = server.members.find(
+  (member) => member.profileId === profile.id
+ )?.role;
  const allMembers = server?.members;
 
  return (

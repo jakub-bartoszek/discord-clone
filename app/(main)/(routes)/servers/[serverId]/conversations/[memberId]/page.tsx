@@ -1,13 +1,13 @@
 import { redirect } from "next/navigation";
-
-import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
 import { getOrCreateConversation } from "@/lib/conversation";
+import { auth } from "@clerk/nextjs/server";
+
 import { ChatHeader } from "@/components/chat/chat-header";
 import { ChatMessages } from "@/components/chat/chat-messages";
 import { ChatInput } from "@/components/chat/chat-input";
 import { MediaRoom } from "@/components/media-room";
-import { auth } from "@clerk/nextjs/server";
 
 interface MemberIdPageProps {
  params: {

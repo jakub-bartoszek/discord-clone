@@ -1,5 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import axios from "axios";
+import qs from "query-string";
+import { cn } from "@/lib/utils";
 import {
  Channel,
  ChannelType,
@@ -8,15 +13,10 @@ import {
  Profile,
  Server
 } from "@prisma/client";
-import { useParams, useRouter } from "next/navigation";
-import { Edit, Hash, Lock, Mic, Trash } from "lucide-react";
-
-import qs from "query-string";
-import { cn } from "@/lib/utils";
-import { ActionTooltip } from "@/components/action-tooltip";
 import { ModalType, useModal } from "@/hooks/use-modal-store";
-import { useEffect, useState } from "react";
-import axios from "axios";
+
+import { Edit, Hash, Lock, Mic, Trash } from "lucide-react";
+import { ActionTooltip } from "@/components/action-tooltip";
 import { ServerMember } from "./server-member";
 
 interface ServerChannelProps {

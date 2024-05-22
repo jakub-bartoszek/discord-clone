@@ -1,13 +1,24 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import qs from "query-string";
 import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useModal } from "@/hooks/use-modal-store";
 import { ChannelType } from "@prisma/client";
 
-import { Dialog, DialogHeader, DialogContent, DialogTitle, DialogFooter } from "../ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+ Dialog,
+ DialogHeader,
+ DialogContent,
+ DialogTitle,
+ DialogFooter
+} from "@/components/ui/dialog";
 import {
  Form,
  FormControl,
@@ -16,10 +27,6 @@ import {
  FormLabel,
  FormMessage
 } from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { useParams, useRouter } from "next/navigation";
-import { useModal } from "@/hooks/use-modal-store";
 import {
  Select,
  SelectContent,
@@ -27,7 +34,6 @@ import {
  SelectTrigger,
  SelectValue
 } from "@/components/ui/select";
-import { useEffect } from "react";
 
 const formSchema = z.object({
  name: z
@@ -35,7 +41,9 @@ const formSchema = z.object({
   .min(1, {
    message: "Channel name is required"
   })
-  .refine((name) => name !== "general", { message: `Channel name cannot be "general"` }),
+  .refine((name) => name !== "general", {
+   message: `Channel name cannot be "general"`
+  }),
  type: z.nativeEnum(ChannelType)
 });
 
@@ -92,7 +100,9 @@ export const EditChannelModal = () => {
   >
    <DialogContent className="bg-white text-black p-0 overflow-hidden">
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">Customize channel</DialogTitle>
+     <DialogTitle className="text-2xl text-center font-bold">
+      Customize channel
+     </DialogTitle>
     </DialogHeader>
     <Form {...form}>
      <form

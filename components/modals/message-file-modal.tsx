@@ -1,10 +1,16 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
 import qs from "query-string";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { useModal } from "@/hooks/use-modal-store";
+
+import { Button } from "@/components/ui/button";
+import { FileUpload } from "@/components/file-upload";
+import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import {
  Dialog,
  DialogHeader,
@@ -12,12 +18,7 @@ import {
  DialogTitle,
  DialogDescription,
  DialogFooter
-} from "../ui/dialog";
-import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
-import { Button } from "../ui/button";
-import { FileUpload } from "../file-upload";
-import { useRouter } from "next/navigation";
-import { useModal } from "@/hooks/use-modal-store";
+} from "@/components/ui/dialog";
 
 const formSchema = z.object({
  fileUrl: z.string().min(1, {
@@ -73,7 +74,9 @@ export const MessageFileModal = () => {
   >
    <DialogContent className="bg-white text-black p-0 overflow-hidden">
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">Add an attachment</DialogTitle>
+     <DialogTitle className="text-2xl text-center font-bold">
+      Add an attachment
+     </DialogTitle>
      <DialogDescription className="text-center text-zinc-500">
       Send file as a message
      </DialogDescription>

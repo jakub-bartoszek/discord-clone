@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
-import { Message } from "@prisma/client";
-
-import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
+import { Message } from "@prisma/client";
 
 const MESSAGES_BATCH = 10;
 
@@ -16,7 +15,8 @@ export async function GET(req: Request) {
 
   if (!profile) return new NextResponse("Unauthorized", { status: 401 });
 
-  if (!channelId) return new NextResponse("Channel ID missing", { status: 400 });
+  if (!channelId)
+   return new NextResponse("Channel ID missing", { status: 400 });
 
   let messages: Message[] = [];
 
@@ -63,6 +63,6 @@ export async function GET(req: Request) {
   return NextResponse.json({ items: messages, nextCursor });
  } catch (error) {
   console.error("[MESSAGES_GET]", error);
-  return new NextResponse("Internal error", { status: 500 });
+  return new NextResponse("Internal Error", { status: 500 });
  }
 }

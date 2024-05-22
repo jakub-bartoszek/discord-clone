@@ -1,14 +1,20 @@
 "use client";
 
-import { Dialog, DialogHeader, DialogContent, DialogTitle } from "../ui/dialog";
-import { Check, Copy, RefreshCw } from "lucide-react";
+import { useState } from "react";
+import axios from "axios";
+import { useOrigin } from "@/hooks/use-origin";
 import { useModal } from "@/hooks/use-modal-store";
+
+import { Check, Copy, RefreshCw } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useOrigin } from "@/hooks/use-origin";
-import { useState } from "react";
-import axios from "axios";
+import {
+ Dialog,
+ DialogHeader,
+ DialogContent,
+ DialogTitle
+} from "@/components/ui/dialog";
 
 export const InviteModal = () => {
  const { onOpen, isOpen, onClose, type, data } = useModal();
@@ -51,7 +57,9 @@ export const InviteModal = () => {
   >
    <DialogContent className="bg-white text-black p-0 overflow-hidden">
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">Invite Friends!</DialogTitle>
+     <DialogTitle className="text-2xl text-center font-bold">
+      Invite Friends!
+     </DialogTitle>
     </DialogHeader>
     <div className="p-6">
      <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">

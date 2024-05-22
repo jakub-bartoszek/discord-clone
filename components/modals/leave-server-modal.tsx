@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useModal } from "@/hooks/use-modal-store";
 
+import { Button } from "@/components/ui/button";
 import {
  Dialog,
  DialogHeader,
@@ -12,8 +14,6 @@ import {
  DialogFooter,
  DialogDescription
 } from "@/components/ui/dialog";
-import { useModal } from "@/hooks/use-modal-store";
-import { Button } from "@/components/ui/button";
 
 export const LeaveServerModal = () => {
  const { isOpen, onClose, type, data } = useModal();
@@ -47,7 +47,9 @@ export const LeaveServerModal = () => {
   >
    <DialogContent className="bg-white text-black p-0 overflow-hidden">
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">Leave server</DialogTitle>
+     <DialogTitle className="text-2xl text-center font-bold">
+      Leave server
+     </DialogTitle>
      <DialogDescription>
       Are you sure you want to leave{" "}
       <span className="font-semibold text-indigo-500">{server?.name}</span>?

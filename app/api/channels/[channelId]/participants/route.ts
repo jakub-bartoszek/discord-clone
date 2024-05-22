@@ -26,6 +26,6 @@ export async function GET(req: Request) {
   return NextResponse.json(participants);
  } catch (error) {
   console.error("[PARTICIPANTS_ERROR]", error);
-  return new NextResponse("Internal error", { status: 500 });
+  return new NextResponse("Internal Error", { status: 500 });
  }
 }

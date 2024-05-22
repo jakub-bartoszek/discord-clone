@@ -1,8 +1,9 @@
 "use client";
 
-import qs from "query-string";
 import { useState } from "react";
+import qs from "query-string";
 import axios from "axios";
+import { useModal } from "@/hooks/use-modal-store";
 
 import {
  Dialog,
@@ -12,7 +13,6 @@ import {
  DialogFooter,
  DialogDescription
 } from "@/components/ui/dialog";
-import { useModal } from "@/hooks/use-modal-store";
 import { Button } from "@/components/ui/button";
 
 export const DeleteMessageModal = () => {

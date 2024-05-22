@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Profile } from "@prisma/client";
 import { LiveKitRoom, VideoConference } from "@livekit/components-react";
 import "@livekit/components-styles";
 import { Loader2 } from "lucide-react";
-import { Profile } from "@prisma/client";
 
 interface MediaRoomProps {
  chatId: string;

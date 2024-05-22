@@ -1,7 +1,7 @@
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
+import { auth } from "@clerk/nextjs/server";
 
 interface ServerIdPageProps {
  params: {

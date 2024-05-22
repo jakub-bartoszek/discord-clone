@@ -1,9 +1,9 @@
-import { v4 as uuidv4 } from "uuid";
 import { NextResponse } from "next/server";
-
-import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
 import { MemberRole } from "@prisma/client";
+import { v4 as uuidv4 } from "uuid";
+
 
 export async function POST(req: Request) {
  try {

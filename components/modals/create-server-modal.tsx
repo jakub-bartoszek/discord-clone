@@ -1,9 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import * as z from "zod";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useModal } from "@/hooks/use-modal-store";
 import { useForm } from "react-hook-form";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FileUpload } from "@/components/file-upload";
 import {
  Dialog,
  DialogHeader,
@@ -11,7 +17,7 @@ import {
  DialogTitle,
  DialogDescription,
  DialogFooter
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import {
  Form,
  FormControl,
@@ -20,11 +26,6 @@ import {
  FormLabel,
  FormMessage
 } from "@/components/ui/form";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { FileUpload } from "../file-upload";
-import { useRouter } from "next/navigation";
-import { useModal } from "@/hooks/use-modal-store";
 
 const formSchema = z.object({
  name: z.string().min(1, {
@@ -74,9 +75,12 @@ export const CreateServerModal = () => {
   >
    <DialogContent className="bg-white text-black p-0 overflow-hidden">
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">Customize your server</DialogTitle>
+     <DialogTitle className="text-2xl text-center font-bold">
+      Customize your server
+     </DialogTitle>
      <DialogDescription className="text-center text-zinc-500">
-      Give your server a personality with a name and an image. You can always change it later.
+      Give your server a personality with a name and an image. You can always
+      change it later.
      </DialogDescription>
     </DialogHeader>
     <Form {...form}>

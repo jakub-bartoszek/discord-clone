@@ -1,8 +1,11 @@
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
 import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
 
-export async function DELETE(req: Request, { params }: { params: { serverId: string } }) {
+export async function DELETE(
+ req: Request,
+ { params }: { params: { serverId: string } }
+) {
  try {
   const profile = await currentProfile();
 
@@ -14,7 +17,7 @@ export async function DELETE(req: Request, { params }: { params: { serverId: str
    where: {
     id: params.serverId,
     profileId: profile.id
-   },
+   }
   });
 
   return NextResponse.json(server);
@@ -24,7 +27,10 @@ export async function DELETE(req: Request, { params }: { params: { serverId: str
  }
 }
 
-export async function PATCH(req: Request, { params }: { params: { serverId: string } }) {
+export async function PATCH(
+ req: Request,
+ { params }: { params: { serverId: string } }
+) {
  try {
   const profile = await currentProfile();
   const { name, imageUrl } = await req.json();

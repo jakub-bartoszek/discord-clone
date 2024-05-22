@@ -1,9 +1,12 @@
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { MemberRole } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { db } from "@/lib/db";
+import { currentProfile } from "@/lib/current-profile";
+import { MemberRole } from "@prisma/client";
 
-export async function DELETE(req: Request, { params }: { params: { channelId: string } }) {
+export async function DELETE(
+ req: Request,
+ { params }: { params: { channelId: string } }
+) {
  try {
   const profile = await currentProfile();
   const { searchParams } = new URL(req.url);
@@ -53,7 +56,10 @@ export async function DELETE(req: Request, { params }: { params: { channelId: st
  }
 }
 
-export async function PATCH(req: Request, { params }: { params: { channelId: string } }) {
+export async function PATCH(
+ req: Request,
+ { params }: { params: { channelId: string } }
+) {
  try {
   const profile = await currentProfile();
   const { name, type } = await req.json();

@@ -1,5 +1,13 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import qs from "query-string";
+import axios from "axios";
+import { ServerWithMembersWithProfiles } from "@/types";
+import { useModal } from "@/hooks/use-modal-store";
+import { MemberRole } from "@prisma/client";
+
 import {
  Check,
  Gavel,
@@ -10,17 +18,15 @@ import {
  ShieldCheck,
  ShieldQuestion
 } from "lucide-react";
-import { useState } from "react";
-import { MemberRole } from "@prisma/client";
-import qs from "query-string";
-import axios from "axios";
-
-import { ServerWithMembersWithProfiles } from "@/types";
-import { Dialog, DialogHeader, DialogContent, DialogTitle, DialogDescription } from "../ui/dialog";
-import { useModal } from "@/hooks/use-modal-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { UserAvatar } from "@/components/user-avatar";
-
+import {
+ Dialog,
+ DialogHeader,
+ DialogContent,
+ DialogTitle,
+ DialogDescription
+} from "@/components/ui/dialog";
 import {
  DropdownMenu,
  DropdownMenuContent,
@@ -32,7 +38,6 @@ import {
  DropdownMenuTrigger,
  DropdownMenuSubTrigger
 } from "@/components/ui/dropdown-menu";
-import { useRouter } from "next/navigation";
 
 const roleIconMap = {
  GUEST: null,
@@ -97,7 +102,9 @@ export const MembersModal = () => {
   >
    <DialogContent className="bg-white text-black overflow-hidden">
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">Manage members</DialogTitle>
+     <DialogTitle className="text-2xl text-center font-bold">
+      Manage members
+     </DialogTitle>
      <DialogDescription className="text-center text-zinc-500">
       {server?.members?.length} Members
      </DialogDescription>
@@ -130,20 +137,32 @@ export const MembersModal = () => {
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
              <DropdownMenuSubContent>
-              <DropdownMenuItem onClick={() => onRoleChange(member.id, "GUEST")}>
+              <DropdownMenuItem
+               onClick={() => onRoleChange(member.id, "GUEST")}
+              >
                <Shield className="w-4 h-4 mr-2" />
                Guest
-               {member.role === "GUEST" && <Check className="w-4 h-4 ml-auto" />}
+               {member.role === "GUEST" && (
+                <Check className="w-4 h-4 ml-auto" />
+               )}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onRoleChange(member.id, "MODERATOR")}>
+              <DropdownMenuItem
+               onClick={() => onRoleChange(member.id, "MODERATOR")}
+              >
                <ShieldCheck className="w-4 h-4 mr-2" />
                Moderator
-               {member.role === "MODERATOR" && <Check className="w-4 h-4 ml-auto" />}
+               {member.role === "MODERATOR" && (
+                <Check className="w-4 h-4 ml-auto" />
+               )}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => onRoleChange(member.id, "ADMIN")}>
+              <DropdownMenuItem
+               onClick={() => onRoleChange(member.id, "ADMIN")}
+              >
                <ShieldAlert className="w-4 h-4 mr-2" />
                Admin
-               {member.role === "ADMIN" && <Check className="w-4 h-4 ml-auto" />}
+               {member.role === "ADMIN" && (
+                <Check className="w-4 h-4 ml-auto" />
+               )}
               </DropdownMenuItem>
              </DropdownMenuSubContent>
             </DropdownMenuPortal>
