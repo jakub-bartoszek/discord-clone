@@ -14,7 +14,7 @@ App live here: [discord-clone-jbd.up.railway.app](https://discord-clone-jbd.up.r
 1. Clone the repository:
 
     ```
-    git clone https://github.com/your-username/discord-clone.git
+    git clone https://github.com/jakub-bartoszek/discord-clone.git
     cd discord-clone
     ```
 2. Install dependencies:
