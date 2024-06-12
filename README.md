@@ -4,11 +4,10 @@ A Discord-like application where you can create servers and channels, invite fri
 App live here: [discord-clone-jbd.up.railway.app](https://discord-clone-jbd.up.railway.app/)
 
 ## Table of Contents
-- Installation
-- Usage
-- Features
-- License
-- Contact
+- [Installation](#instalation)
+- [Features](#features)
+- [Technologies used](#technologies-used)
+- [Contact](#contact)
 
 ## Instalation
 1. Clone the repository:
