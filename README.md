@@ -14,7 +14,7 @@ App live here: [jakub-bartoszek.github.io/Snake](https://jakub-bartoszek.github.
 
     ```
     git clone https://github.com/jakub-bartoszek/snake.git
-    cd discord-clone
+    cd snake
     ```
 2. Install dependencies:
     ```
