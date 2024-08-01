@@ -1,7 +1,7 @@
 # Discord-clone
 A Discord-like application where you can create servers and channels, invite friends to servers, and communicate through messages and voice chat.
 
-App live here: [discord-clone-jbd.up.railway.app](https://discord-clone-jbd.up.railway.app/)
+App live here: [discord-clone-jb.vercel.app](https://discord-clone-jb.vercel.app/)
 
 ## Table of Contents
 - [Installation](#instalation)
