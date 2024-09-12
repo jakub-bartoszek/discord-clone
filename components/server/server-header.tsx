@@ -43,7 +43,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
      <ChevronDownIcon className="h-5 w-5 ml-auto" />
     </button>
    </DropdownMenuTrigger>
-   <DropdownMenuContent className="w-56 text-xs font-medium text-black dark:text-neutral-400 space-y-[2px]">
+   <DropdownMenuContent className="w-56 text-xs font-medium space-y-[2px]">
     {isModerator && (
      <DropdownMenuItem
       onClick={() => onOpen("invite", { server })}
