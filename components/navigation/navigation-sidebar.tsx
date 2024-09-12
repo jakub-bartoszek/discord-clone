@@ -2,10 +2,8 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 import { UserButton } from "@clerk/nextjs";
-
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ModeToggle } from "@/components/mode-toggle";
 import { NavigationAction } from "./navigation-action";
 import { NavigationItem } from "./navigation-item";
 
@@ -27,10 +25,10 @@ export const NavigationSidebar = async () => {
  });
 
  return (
-  <div className="space-y-4 flex flex-col items-center h-full text-primary w-full bg-[#E3E5E8] dark:bg-[#1E1F22] py-3">
+  <div className="flex h-full w-full flex-col items-center space-y-4 rounded-md bg-black/40 py-3 text-primary">
    <NavigationAction />
-   <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
-   <ScrollArea className="flex-1 w-full">
+   <Separator className="mx-auto h-[2px] w-10 rounded-md bg-[#eb07ff]" />
+   <ScrollArea className="w-full flex-1">
     {servers.map((server) => (
      <div
       key={server.id}
@@ -44,8 +42,7 @@ export const NavigationSidebar = async () => {
      </div>
     ))}
    </ScrollArea>
-   <div className="pb-3 mt-auto flex items-center flex-col gap-y-4">
-    <ModeToggle />
+   <div className="mt-auto flex flex-col items-center gap-y-4 pb-3">
     <UserButton
      afterSignOutUrl="/"
      appearance={{
