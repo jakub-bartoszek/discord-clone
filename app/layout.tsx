@@ -17,7 +17,7 @@ export const metadata: Metadata = {
  description:
   "Connect, chat, and collaborate seamlessly with a powerful Discord clone built with Next.js 14. Join servers, engage in real-time conversations, and customize your experience to suit your community's needs. Available on desktop and mobile.",
  icons: {
-  icon: "/discord-icon.png",
+  icon: "/discord-icon.png"
  }
 };
 
@@ -32,18 +32,16 @@ export default function RootLayout({
     lang="en"
     suppressHydrationWarning
    >
-    <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
-     <ThemeProvider
-      attribute="class"
-      defaultTheme="dark"
-      enableSystem={true}
-      storageKey="discord-theme"
-     >
-      <SocketProvider>
-       <ModalProvider />
-       <QueryProvider>{children}</QueryProvider>
-      </SocketProvider>
-     </ThemeProvider>
+    <body
+     className={cn(
+      font.className,
+      "bg-gradient-to-bl from-[#2a0a51] to-[#150d26] text-white"
+     )}
+    >
+     <SocketProvider>
+      <ModalProvider />
+      <QueryProvider>{children}</QueryProvider>
+     </SocketProvider>
     </body>
    </html>
   </ClerkProvider>
