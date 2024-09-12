@@ -26,9 +26,7 @@ export const ServerSection = ({
 
  return (
   <div className="flex items-center justify-between py-2">
-   <p className="text-xs uppercase font-semibold text-zinc-500 dark:text-zinc-400">
-    {label}
-   </p>
+   <p className="text-xs uppercase font-semibold text-white/50">{label}</p>
    {role !== MemberRole.GUEST && sectionType === "channels" && (
     <ActionTooltip
      label="Create channel"
@@ -36,7 +34,7 @@ export const ServerSection = ({
     >
      <button
       onClick={() => onOpen("createChannel", { channelType })}
-      className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
+      className="text-white/50 hover:text-white transition"
      >
       <Plus className="w-4 h-4" />
      </button>
@@ -49,7 +47,7 @@ export const ServerSection = ({
     >
      <button
       onClick={() => onOpen("members", { server })}
-      className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
+      className="text-white/50 hover:text-white transition"
      >
       <Settings className="w-4 h-4" />
      </button>
