@@ -77,7 +77,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
  const allMembers = server?.members;
 
  return (
-  <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-zinc-100">
+  <div className="flex flex-col h-full rounded-md text-primary w-full bg-black/30">
    <ServerHeader
     server={server}
     role={role}
@@ -116,7 +116,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
       ]}
      />
     </div>
-    <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2" />
+    <Separator className="bg-white/20 rounded-md my-2" />
     {!!textChannels?.length && (
      <div className="mb-2">
       <ServerSection
