@@ -7,17 +7,17 @@ interface ChatWelcomeProps {
 
 export const ChatWelcome = ({ name, type }: ChatWelcomeProps) => {
  return (
-  <div className="space-y-2 px-4 mb-4">
+  <div className="mb-4 space-y-2 px-4">
    {type === "channel" && (
-    <div className="h-[75px] w-[75px] rounded-full bg-zinc-500 dark:bg-zinc-700 flex items-center justify-center">
-     <Hash className="h-12 w-12 text-white" />
+    <div className="flex h-[75px] w-[75px] bg-black/30 text-white items-center justify-center rounded-full">
+     <Hash className="h-12 w-12" />
     </div>
    )}
-   <p className="text-xl md:text-3xl font-bold">
+   <p className="text-xl font-bold md:text-3xl">
     {type === "channel" ? "Welcome to #" : ""}
     {name}
    </p>
-   <p className="text-zinc-600 dark:text-zinc-400 text-sm">
+   <p className="text-sm text-white/50">
     {type === "channel"
      ? `This is the start of #${name} channel.`
      : `This is the start of your conversation with ${name}`}

@@ -122,7 +122,7 @@ export const ChatItem = ({
  const isImage = !isPDF && fileUrl;
 
  return (
-  <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
+  <div className="relative group flex items-center hover:bg-white/5 rounded-md p-4 transition w-full">
    <div className="group flex gap-x-2 items-start w-full">
     <div
      onClick={onMemberClick}
@@ -135,7 +135,7 @@ export const ChatItem = ({
       <div className="flex items-center">
        <p
         onClick={onMemberClick}
-        className="font-semibold text-sm hover:underline cursor-pointer"
+        className="font-semibold text-sm cursor-pointer"
        >
         {member.profile.name}
        </p>
@@ -143,16 +143,14 @@ export const ChatItem = ({
         {roleIconMap[member.role]}
        </ActionTooltip>
       </div>
-      <span className="text-xs text-zinc-500 dark:text-zinc-400">
-       {timestamp}
-      </span>
+      <span className="text-xs text-white/50">{timestamp}</span>
      </div>
      {isImage && (
       <a
        href={fileUrl}
        target="_blank"
        rel="noopener noreferer"
-       className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48"
+       className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center h-48 w-48"
       >
        <Image
         src={fileUrl}
@@ -178,15 +176,13 @@ export const ChatItem = ({
      {!fileUrl && !isEditing && (
       <p
        className={cn(
-        "text-sm text-zinc-600 dark:text-zinc-300",
-        deleted && "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1"
+        "text-sm text-white/90",
+        deleted && "italic text-white/50 text-xs mt-1"
        )}
       >
        {content}
        {isUpdated && !deleted && (
-        <span className="textt-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
-         (edited)
-        </span>
+        <span className="text-[10px] mx-2 text-white/50">(edited)</span>
        )}
       </p>
      )}
@@ -230,12 +226,12 @@ export const ChatItem = ({
     </div>
    </div>
    {canDeleteMessage && (
-    <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
+    <div className="hidden group-hover:flex items-center gap-x-2 absolute p-2 -top-2 right-5 rounded-md bg-black/50 backdrop-blur-lg">
      {canEditMessage && (
       <ActionTooltip label="Edit">
        <Edit
         onClick={() => setIsEditing(true)}
-        className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+        className="ml-auto h-4 w-4 cursor-pointer text-white/50 transition hover:text-white"
        />
       </ActionTooltip>
      )}
@@ -247,7 +243,7 @@ export const ChatItem = ({
          query: socketQuery
         })
        }
-       className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+       className="ml-auto h-4 w-4 cursor-pointer text-white/50 transition hover:text-white"
       />
      </ActionTooltip>
     </div>
