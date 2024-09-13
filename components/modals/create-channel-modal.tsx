@@ -103,7 +103,7 @@ export const CreateChannelModal = () => {
   >
    <DialogContent>
     <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">
+     <DialogTitle className="text-center text-2xl font-bold">
       Customize channel
      </DialogTitle>
     </DialogHeader>
@@ -118,13 +118,11 @@ export const CreateChannelModal = () => {
         name="name"
         render={({ field }) => (
          <FormItem>
-          <FormLabel className="font-bold">
-           Channel name
-          </FormLabel>
+          <FormLabel className="font-bold">Channel name</FormLabel>
           <FormControl>
            <Input
             disabled={isLoading}
-            className="bg-black/50 border-0 focus-visible:ring-0focus-visible: ring-offset-0"
+            className="focus-visible:ring-0focus-visible: border-0 bg-black/50 ring-offset-0"
             placeholder="Enter channel name"
             {...field}
            />
@@ -145,13 +143,12 @@ export const CreateChannelModal = () => {
            defaultValue={field.value}
           >
            <FormControl>
-            <SelectTrigger className="bg-black/50 border-0 focus:ring-0 ring-offset-0 focus:ring-offset-0 capitalize outline-none">
+            <SelectTrigger className="border-0 bg-black/50 capitalize outline-none ring-offset-0 focus:ring-0 focus:ring-offset-0">
              <SelectValue placeholder="Select a channel type" />
-             <SelectContent
-             className="bg-black/50 backdrop-blur-lg border-none">
+             <SelectContent className="border-none bg-black/50 backdrop-blur-lg">
               {Object.values(ChannelType).map((type) => (
                <SelectItem
-               className="hover:bg-white/10 rounded-md cursor-pointer"
+                className="cursor-pointer rounded-md capitalize hover:bg-white/10"
                 key={type}
                 value={type}
                >
