@@ -104,7 +104,7 @@ export const CreateChannelModal = () => {
    <DialogContent>
     <DialogHeader className="pt-8 px-6">
      <DialogTitle className="text-center text-2xl font-bold">
-      Customize channel
+      Create channel
      </DialogTitle>
     </DialogHeader>
     <Form {...form}>
@@ -167,7 +167,7 @@ export const CreateChannelModal = () => {
       <DialogFooter className="px-6 py-4">
        <Button
         disabled={isLoading}
-        variant={"primary"}
+        
        >
         Create channel
        </Button>

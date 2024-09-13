@@ -150,7 +150,7 @@ export const EditChannelModal = () => {
                 key={type}
                 value={type}
                 className="cursor-pointer rounded-md capitalize hover:bg-white/10"
-                >
+               >
                 {type.toLowerCase()}
                </SelectItem>
               ))}
@@ -164,12 +164,7 @@ export const EditChannelModal = () => {
        />
       </div>
       <DialogFooter className="px-6 py-4">
-       <Button
-        disabled={isLoading}
-        variant={"primary"}
-       >
-        Save
-       </Button>
+       <Button disabled={isLoading}>Save</Button>
       </DialogFooter>
      </form>
     </Form>

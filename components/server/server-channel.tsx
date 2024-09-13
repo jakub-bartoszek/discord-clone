@@ -106,7 +106,7 @@ export const ServerChannel = ({
      className={cn(
       "line-clamp-1 text-sm font-semibold text-white/50 transition group-hover:text-white",
       params?.channelId === channel.id &&
-       "text-primary text-white dark:group-hover:text-white"
+       "text-white dark:group-hover:text-white"
      )}
     >
      {channel.name}

@@ -77,7 +77,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
  const allMembers = server?.members;
 
  return (
-  <div className="flex flex-col h-full rounded-md text-primary w-full bg-black/30">
+  <div className="flex flex-col h-full rounded-md w-full bg-black/30">
    <ServerHeader
     server={server}
     role={role}
