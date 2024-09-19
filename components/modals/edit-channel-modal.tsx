@@ -98,7 +98,7 @@ export const EditChannelModal = () => {
    open={isModalOpen}
    onOpenChange={handleClose}
   >
-   <DialogContent>
+   <DialogContent className="max-w-lg">
     <DialogHeader className="pt-8 px-6">
      <DialogTitle className="text-2xl text-center font-bold">
       Customize channel
@@ -164,7 +164,7 @@ export const EditChannelModal = () => {
        />
       </div>
       <DialogFooter className="px-6 py-4">
-       <Button disabled={isLoading}>Save</Button>
+       <Button variant="primary" disabled={isLoading}>Save</Button>
       </DialogFooter>
      </form>
     </Form>

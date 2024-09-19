@@ -52,33 +52,32 @@ export const DeleteChannelModal = () => {
    open={isModalOpen}
    onOpenChange={onClose}
   >
-   <DialogContent className="bg-white text-black p-0 overflow-hidden">
+   <DialogContent className="max-w-xs">
     <DialogHeader className="pt-8 px-6">
      <DialogTitle className="text-2xl text-center font-bold">
       Delete channel
      </DialogTitle>
-     <DialogDescription>
+     <DialogDescription className="text-white/80">
       Are you sure you want to do this?
       <br />
-      <span className="font-semibold text-indigo-500">#{channel?.name}</span>
+      <span className="font-semibold text-indigo-500">#{channel?.name} </span>
       will be permamently deleted.
      </DialogDescription>
     </DialogHeader>
-    <DialogFooter className=" bg-gray-100 px-6 py-4">
+    <DialogFooter className="px-6 py-4">
      <div className="flex items-center justify-between w-full">
       <Button
        disabled={isLoading}
        onClick={onClose}
-       variant="ghost"
       >
        Cancel
       </Button>
       <Button
        disabled={isLoading}
        onClick={onClick}
-       variant="primary"
+       className="bg-rose-600 hover:bg-rose-500"
       >
-       Confirm
+       Delete
       </Button>
      </div>
     </DialogFooter>
