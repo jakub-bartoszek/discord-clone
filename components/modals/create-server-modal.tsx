@@ -73,11 +73,9 @@ export const CreateServerModal = () => {
    open={isModalOpen}
    onOpenChange={handleClose}
   >
-   <DialogContent className="max-w-lg">
-    <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">
-      Customize your server
-     </DialogTitle>
+   <DialogContent>
+    <DialogHeader>
+     <DialogTitle>Customize your server</DialogTitle>
      <DialogDescription>
       Give your server a personality with a name and an image. You can always
       change it later.
@@ -111,13 +109,10 @@ export const CreateServerModal = () => {
         name="name"
         render={({ field }) => (
          <FormItem>
-          <FormLabel>
-           Server name
-          </FormLabel>
+          <FormLabel>Server name</FormLabel>
           <FormControl>
            <Input
             disabled={isLoading}
-            className="focus-visible:ring-0focus-visible: border-0 bg-black/50 ring-offset-0"
             placeholder="Enter server name"
             {...field}
            />

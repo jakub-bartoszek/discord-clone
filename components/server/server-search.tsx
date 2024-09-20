@@ -74,7 +74,10 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
     open={open}
     onOpenChange={setOpen}
    >
-    <CommandInput placeholder="Search all channels and members" />
+    <CommandInput
+     className="mr-8"
+     placeholder="Search all channels and members"
+    />
     <CommandList>
      <CommandEmpty>No results found</CommandEmpty>
      {data.map(({ label, type, data }) => {
@@ -82,6 +85,7 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
 
       return (
        <CommandGroup
+        className="pb-2"
         key={label}
         heading={label}
        >

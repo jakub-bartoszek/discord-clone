@@ -83,7 +83,7 @@ export const EditServerModal = () => {
    open={isModalOpen}
    onOpenChange={handleClose}
   >
-   <DialogContent className="max-w-lg">
+   <DialogContent>
     <DialogHeader>
      <DialogTitle>Customize your server</DialogTitle>
      <DialogDescription>

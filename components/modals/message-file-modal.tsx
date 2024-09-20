@@ -72,21 +72,14 @@ export const MessageFileModal = () => {
    open={isModalOpen}
    onOpenChange={handleClose}
   >
-   <DialogContent className="bg-white text-black p-0 overflow-hidden">
-    <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">
-      Add an attachment
-     </DialogTitle>
-     <DialogDescription className="text-center text-zinc-500">
-      Send file as a message
-     </DialogDescription>
+   <DialogContent>
+    <DialogHeader>
+     <DialogTitle>Add an attachment</DialogTitle>
+     <DialogDescription>Send file as a message</DialogDescription>
     </DialogHeader>
     <Form {...form}>
-     <form
-      onSubmit={form.handleSubmit(onSubmit)}
-      className="space-y-8"
-     >
-      <div className="space-y-8 px-6">
+     <form onSubmit={form.handleSubmit(onSubmit)}>
+      <div className="px-6">
        <div className="flex items-center justify-center text-center">
         <FormField
          control={form.control}
@@ -105,10 +98,10 @@ export const MessageFileModal = () => {
         />
        </div>
       </div>
-      <DialogFooter className="bg-gray-100 px-6 py-4">
+      <DialogFooter>
        <Button
+        variant="primary"
         disabled={isLoading}
-        
        >
         Send
        </Button>

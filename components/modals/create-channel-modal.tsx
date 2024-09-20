@@ -101,9 +101,9 @@ export const CreateChannelModal = () => {
    open={isModalOpen}
    onOpenChange={handleClose}
   >
-   <DialogContent className="max-w-lg">
-    <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-center text-2xl font-bold">
+   <DialogContent>
+    <DialogHeader>
+     <DialogTitle>
       Create channel
      </DialogTitle>
     </DialogHeader>
@@ -118,11 +118,10 @@ export const CreateChannelModal = () => {
         name="name"
         render={({ field }) => (
          <FormItem>
-          <FormLabel className="font-bold">Channel name</FormLabel>
+          <FormLabel>Channel name</FormLabel>
           <FormControl>
            <Input
             disabled={isLoading}
-            className="focus-visible:ring-0focus-visible: border-0 bg-black/50 ring-offset-0"
             placeholder="Enter channel name"
             {...field}
            />
@@ -143,12 +142,11 @@ export const CreateChannelModal = () => {
            defaultValue={field.value}
           >
            <FormControl>
-            <SelectTrigger className="border-0 bg-black/50 capitalize outline-none ring-offset-0 focus:ring-0 focus:ring-offset-0">
+            <SelectTrigger>
              <SelectValue placeholder="Select a channel type" />
-             <SelectContent className="border-none bg-black/50 backdrop-blur-lg">
+             <SelectContent>
               {Object.values(ChannelType).map((type) => (
                <SelectItem
-                className="cursor-pointer rounded-md capitalize hover:bg-white/10"
                 key={type}
                 value={type}
                >
@@ -164,7 +162,7 @@ export const CreateChannelModal = () => {
         )}
        />
       </div>
-      <DialogFooter className="px-6 py-4">
+      <DialogFooter>
        <Button
         variant="primary"
         disabled={isLoading}

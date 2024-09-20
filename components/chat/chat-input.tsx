@@ -69,7 +69,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
           onClick={() => onOpen("messageFile", { apiUrl, query })}
           className="absolute left-8 top-7 flex h-[24px] w-[24px] items-center justify-center rounded-full bg-white/10 p-1 text-white/50 transition hover:bg-white/20 hover:text-white"
          >
-          <Plus className="" />
+          <Plus />
          </button>
          <Input
           disabled={isLoading}

@@ -38,7 +38,7 @@ const DialogContent = React.forwardRef<
   <DialogPrimitive.Content
    ref={ref}
    className={cn(
-    "fixed left-[50%] top-[50%] z-50 grid w-full translate-x-[-50%] translate-y-[-50%] gap-4 bg-[#250f4a] p-0 overflow-hidden rounded-md shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg",
+    "fixed left-[50%] top-[50%] z-50 grid w-full max-w-sm translate-x-[-50%] translate-y-[-50%] gap-4 overflow-hidden rounded-md bg-[#250f4a] p-0 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg sm:max-w-lg",
     className
    )}
    {...props}
@@ -87,7 +87,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
  <DialogPrimitive.Title
   ref={ref}
-  className={cn("text-center text-2xl font-bold leading-none tracking-tight", className)}
+  className={cn(
+   "text-center text-2xl font-bold leading-none tracking-tight pb-2",
+   className
+  )}
   {...props}
  />
 ));

@@ -100,16 +100,12 @@ export const MembersModal = () => {
    open={isModalOpen}
    onOpenChange={onClose}
   >
-   <DialogContent className="bg-white text-black overflow-hidden">
-    <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">
-      Manage members
-     </DialogTitle>
-     <DialogDescription className="text-center text-zinc-500">
-      {server?.members?.length} Members
-     </DialogDescription>
+   <DialogContent>
+    <DialogHeader>
+     <DialogTitle>Manage members</DialogTitle>
+     <DialogDescription>{server?.members?.length} Members</DialogDescription>
     </DialogHeader>
-    <ScrollArea className="mt-8 max-h-[420px] pr-6">
+    <ScrollArea className="max-h-[420px] px-4">
      {server?.members?.map((member) => (
       <div
        key={member.id}
@@ -127,11 +123,11 @@ export const MembersModal = () => {
         <div className="ml-auto">
          <DropdownMenu>
           <DropdownMenuTrigger>
-           <MoreVertical className="h-4 w-4 text-zinc-500" />
+           <MoreVertical />
           </DropdownMenuTrigger>
           <DropdownMenuContent side="left">
            <DropdownMenuSub>
-            <DropdownMenuSubTrigger className="flex items-center">
+            <DropdownMenuSubTrigger>
              <ShieldQuestion className="w-4 h-4 mr-2" />
              <span>Role</span>
             </DropdownMenuSubTrigger>

@@ -98,11 +98,9 @@ export const EditChannelModal = () => {
    open={isModalOpen}
    onOpenChange={handleClose}
   >
-   <DialogContent className="max-w-lg">
-    <DialogHeader className="pt-8 px-6">
-     <DialogTitle className="text-2xl text-center font-bold">
-      Customize channel
-     </DialogTitle>
+   <DialogContent>
+    <DialogHeader>
+     <DialogTitle>Customize channel</DialogTitle>
     </DialogHeader>
     <Form {...form}>
      <form
@@ -115,13 +113,10 @@ export const EditChannelModal = () => {
         name="name"
         render={({ field }) => (
          <FormItem>
-          <FormLabel className="uppercase text-xs font-bold">
-           Channel name
-          </FormLabel>
+          <FormLabel>Channel name</FormLabel>
           <FormControl>
            <Input
             disabled={isLoading}
-            className="bg-black/50 ring-offset-0 border-0 focus-visible:ring-0"
             placeholder="Enter channel name"
             {...field}
            />
@@ -142,14 +137,13 @@ export const EditChannelModal = () => {
            defaultValue={field.value}
           >
            <FormControl>
-            <SelectTrigger className="border-0 bg-black/50 capitalize outline-none ring-offset-0 focus:ring-0 focus:ring-offset-0">
+            <SelectTrigger>
              <SelectValue placeholder="Select a channel type" />
-             <SelectContent className="border-none bg-black/50 backdrop-blur-lg">
+             <SelectContent>
               {Object.values(ChannelType).map((type) => (
                <SelectItem
                 key={type}
                 value={type}
-                className="cursor-pointer rounded-md capitalize hover:bg-white/10"
                >
                 {type.toLowerCase()}
                </SelectItem>
@@ -163,8 +157,21 @@ export const EditChannelModal = () => {
         )}
        />
       </div>
-      <DialogFooter className="px-6 py-4">
-       <Button variant="primary" disabled={isLoading}>Save</Button>
+      <DialogFooter>
+       <div className="flex items-center justify-between w-full">
+        <Button
+         disabled={isLoading}
+         onClick={onClose}
+        >
+         Cancel
+        </Button>
+        <Button
+         variant="primary"
+         disabled={isLoading}
+        >
+         Save
+        </Button>
+       </div>
       </DialogFooter>
      </form>
     </Form>
