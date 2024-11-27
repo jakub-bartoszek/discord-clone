@@ -4,7 +4,7 @@ A Discord-like application where you can create servers and channels, invite fri
 [App live here.](https://discord-clone-jb.vercel.app/)
 
 ## Table of Contents
-- [Installation](#instalation)
+- [Instalation](#instalation)
 - [Features](#features)
 - [Technologies used](#technologies-used)
 - [Contact](#contact)
